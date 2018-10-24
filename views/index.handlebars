@@ -3,21 +3,35 @@
 <h2>Burger Menu</h2>
 
 <ul>
-  {{#each burger}}
-    {{#unless eaten}}
-      {{> burgers/burger-block eaten=false}}
-    {{/unless}}
-  {{/each}}
+  {{#each burgers}} {{#unless eaten}}
+  <li>
+    {{burger_name}}
+
+    <button class="eaten" data-id="{{id}}" data-eaten="{{eaten}}">
+      {{#if eaten}}yummy!{{else}}eat me!{{/if}}
+    </button>
+
+    <button class="delete-burger" data-id="{{id}}">DELETE!</button>
+  </li>
+
+  {{/unless}} {{/each}}
 </ul>
 
 <h2>Burgers eaten</h2>
 
 <ul>
-  {{#each burgers}}
-    {{#if eaten}}
-      {{> burgers/burger-block eaten=true}}
-    {{/if}}
-  {{/each}}
+  {{#each burgers}} {{#if eaten}}
+  <li>
+    {{burger_name}}
+
+    <button class="eaten" data-id="{{id}}" data-eaten="{{eaten}}">
+      {{#if eaten}}yummy!{{else}}eat me!{{/if}}
+    </button>
+
+    <button class="delete-burger" data-id="{{id}}">DELETE!</button>
+  </li>
+
+  {{/if}} {{/each}}
 </ul>
 
 
@@ -29,8 +43,10 @@
   </div>
 
   <div class="form-group">
-    <label for="devour">Devour</label><br>
-    <input type="radio" name="eaten" value="1" checked> Ready to eat<br>
+    <label for="devour">Devour</label>
+    <br>
+    <input type="radio" name="eaten" value="1" checked> Ready to eat
+    <br>
     <input type="radio" name="eaten" value="0"> Eaten
   </div>
 

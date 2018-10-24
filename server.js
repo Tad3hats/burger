@@ -7,6 +7,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 
+var exphbs  = require('express-handlebars');
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -19,12 +20,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
 // Static directory
-app.use(express.static("app/public"));
+app.use(express.static("public"));
 
 // Routes
 // =============================================================
-require("./controllers/burger_controllers.js")(app);
+
+var routes=require("./controllers/burger_controllers.js");
+app.use(routes);
 
 // Starts the server to begin listening
 // =============================================================
